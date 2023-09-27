@@ -1,0 +1,12 @@
+[[headers]]
+  for = "*.wasm.gz"
+  [headers.values]
+    Content-Encoding = "gzip"
+    Content-Type = "application/wasm"
+
+[[headers]]
+  for = "*"
+  [headers.values]
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"
+    Access-Control-Allow-Origin = "*"
