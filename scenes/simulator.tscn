@@ -6,7 +6,6 @@
 
 [node name="Simulator" type="Node2D"]
 script = ExtResource("1_r5vt8")
-mode = 1
 per_frame = 5.0
 
 [node name="Basket" parent="." instance=ExtResource("1_oael4")]
