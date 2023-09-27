@@ -25,7 +25,7 @@ jobs:
       - name: Build
         run: |
           mkdir -v -p build/web
-          godot -v --export "HTML5" build/web/index.html
+          godot -v --export-release "HTML5" build/web/index.html
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
