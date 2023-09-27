@@ -5,6 +5,9 @@ env:
   GODOT_VERSION: 4.1.1
   EXPORT_NAME: "Collector: The Berserkening"
 
+permissions:
+  contents: write
+
 jobs:
   export-web:
     name: Web Export
