@@ -1,6 +1,15 @@
 extends Node2D
 
-@export var simulate: bool = true
+enum Mode {
+	Game,
+	Berserker,
+	Collector
+}
+
+@export var mode: Mode = Mode.Game
+@export var start_interval: float = 1
+@export var min_interval: float = 0.1
+@export var per_frame: float = 60
 
 var ball = preload("res://scenes/projectile.tscn")
 var explosion = preload("res://scenes/explosion.tscn")
@@ -14,45 +23,59 @@ var max_per_second = 120
 var queue = 0
 var max_queue = 5
 
-var timer: Timer
+var spawn_timer: Timer
+var difficulty_timer: Timer
+
+var current_interval = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	timer = Timer.new()
-	timer.wait_time = 1.0
-	add_child(timer)
+	spawn_timer = Timer.new()
+	spawn_timer.wait_time = start_interval
 	
-	timer.connect("timeout", _on_timer_timeout)
-	timer.start()
+	difficulty_timer = Timer.new()
+	difficulty_timer.wait_time = 5.0
+	
+	add_child(spawn_timer)
+	add_child(difficulty_timer)
+	
+	difficulty_timer.connect("timeout", _on_difficulty_timeout)
+	difficulty_timer.start()
+	
+	spawn_timer.connect("timeout", _on_timer_timeout)
+	spawn_timer.start()
 	
 func _on_timer_timeout():
-	max_per_second += 1
+	if mode == Mode.Game:
+		_do_simulation()
+	
+func _on_difficulty_timeout():
+	if current_interval < min_interval:
+		return
+	current_interval /= 2
+	spawn_timer.wait_time = current_interval 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if simulate:
-		_do_simulation()
-
+	if mode == Mode.Berserker:
+		for i in range(per_frame):
+			_do_simulation()
+	
 func _do_simulation():
-	if queue < max_queue:
-		var instance = ball.instantiate()
-		var x = randf_range(0, ProjectSettings.get_setting("display/window/size/viewport_width"))
-		instance.position = Vector2(x, 0)
-		
-		if randi_range(1, 2) == 1:
+	var instance = ball.instantiate()
+	var x = randf_range(0, ProjectSettings.get_setting("display/window/size/viewport_width"))
+	instance.position = Vector2(x, 0)
+	
+	match randi_range(0, 10):
+		0,1,2,3,4,5,6,7,8,9:
 			instance.set_event_type("process")
 			instance.add_to_group("processes")
-		else:
+		10:
 			instance.set_event_type("connection")
 			instance.add_to_group("networks")
-		
-		queue += 1
-		
-		await get_tree().create_timer(1).timeout
-		
-		instance.connect("exploded", _on_projectile_exploded)
-		add_child(instance)
-		queue -= 1
+
+	instance.connect("exploded", _on_projectile_exploded)
+	add_child(instance)
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):

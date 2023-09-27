@@ -91,12 +91,12 @@ alignment = 1
 
 [node name="Simulate" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "Simulation"
+text = "Easy Mode"
 script = ExtResource("3_tg7l4")
 
 [node name="Berserk" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "Berserk"
+text = "Collector Mode"
 script = ExtResource("4_ilt7x")
 
 [connection signal="pressed" from="HBoxContainer/Simulate" to="HBoxContainer/Simulate" method="_on_pressed"]
