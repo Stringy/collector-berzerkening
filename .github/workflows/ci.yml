@@ -58,6 +58,8 @@ jobs:
 
       - name: Commit changes
         run: |
+          git config --global user.email "stringybot"
+          git config --global user.email "stringybot@ci"
           git add .
           git commit -m 'published new build!'
           git push
