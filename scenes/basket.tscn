@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0xhenb8ocuc7"]
+
+[ext_resource type="Texture2D" uid="uid://c6s7cu46ba8pi" path="res://assets/sprites/barrel.svg" id="1_n7c7o"]
+[ext_resource type="Script" path="res://scripts/basket.gd" id="1_u0ihs"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3mkpk"]
+radius = 58.0
+height = 136.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2sdp"]
+radius = 9.0
+height = 82.0
+
+[node name="Basket" type="StaticBody2D"]
+position = Vector2(0, -1)
+script = ExtResource("1_u0ihs")
+
+[node name="Barrel" type="Sprite2D" parent="."]
+position = Vector2(-1.00001, 1)
+scale = Vector2(0.393817, 0.350285)
+texture = ExtResource("1_n7c7o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 19)
+shape = SubResource("CapsuleShape2D_3mkpk")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -85)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, 24)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_r2sdp")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

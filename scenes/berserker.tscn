@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://wx6c0igulspa"]
+
+[ext_resource type="Script" path="res://scripts/controller.gd" id="1_4kgyp"]
+[ext_resource type="Script" path="res://scripts/collector.gd" id="2_qnsxv"]
+[ext_resource type="PackedScene" uid="uid://d0xhenb8ocuc7" path="res://scenes/basket.tscn" id="3_gvs7w"]
+[ext_resource type="PackedScene" uid="uid://cvcvdywx13b8s" path="res://scenes/scoreboard.tscn" id="4_6fdnd"]
+
+[node name="Berserker" type="Node2D"]
+script = ExtResource("1_4kgyp")
+simulate = false
+
+[node name="Collector" type="Node2D" parent="."]
+script = ExtResource("2_qnsxv")
+
+[node name="Basket" parent="." instance=ExtResource("3_gvs7w")]
+position = Vector2(562, 603)
+
+[node name="Scoreboard" parent="." instance=ExtResource("4_6fdnd")]
+
+[connection signal="event" from="Collector" to="." method="_on_collector_event"]
+[connection signal="captured_network" from="Basket" to="." method="_on_basket_captured_network"]
+[connection signal="captured_process" from="Basket" to="." method="_on_basket_captured_process"]

@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://c1bmnfxc2r2gm"]
+
+[ext_resource type="Script" path="res://scripts/ui/main.gd" id="1_6cu04"]
+[ext_resource type="Texture2D" uid="uid://dhf8foivftj46" path="res://assets/title.png" id="1_32y7m"]
+[ext_resource type="Script" path="res://scripts/banner.gd" id="2_nlx0l"]
+[ext_resource type="Script" path="res://scripts/matrix_background.gd" id="2_r3swx"]
+[ext_resource type="Script" path="res://scripts/buttons/simulate.gd" id="3_tg7l4"]
+[ext_resource type="Script" path="res://scripts/buttons/berserk.gd" id="4_ilt7x"]
+[ext_resource type="Texture2D" uid="uid://ccvok64g5aftd" path="res://assets/matrix.jpg" id="6_mxu5l"]
+
+[sub_resource type="SystemFont" id="SystemFont_fo18y"]
+
+[sub_resource type="Animation" id="Animation_hodmg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_soqvl"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_405xp"]
+_data = {
+"RESET": SubResource("Animation_hodmg"),
+"idle": SubResource("Animation_soqvl")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6cu04")
+
+[node name="Matrix" type="Node2D" parent="."]
+script = ExtResource("2_r3swx")
+font = SubResource("SystemFont_fo18y")
+
+[node name="Background" type="TextureRect" parent="."]
+visible = false
+z_index = -1
+layout_mode = 0
+offset_right = 1480.0
+offset_bottom = 832.0
+texture = ExtResource("6_mxu5l")
+
+[node name="Banner" type="Sprite2D" parent="."]
+position = Vector2(584, 123)
+scale = Vector2(1.04218, 1.04218)
+texture = ExtResource("1_32y7m")
+script = ExtResource("2_nlx0l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Banner"]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_405xp")
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_top = 250.0
+offset_right = 1152.0
+offset_bottom = 281.0
+alignment = 1
+
+[node name="Simulate" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Simulation"
+script = ExtResource("3_tg7l4")
+
+[node name="Berserk" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Berserk"
+script = ExtResource("4_ilt7x")
+
+[connection signal="pressed" from="HBoxContainer/Simulate" to="HBoxContainer/Simulate" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Berserk" to="HBoxContainer/Berserk" method="_on_pressed"]

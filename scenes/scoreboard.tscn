@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvcvdywx13b8s"]
+
+[ext_resource type="Script" path="res://scripts/ui/scoreboard.gd" id="1_47sb0"]
+[ext_resource type="Script" path="res://scripts/ui/score.gd" id="2_orhur"]
+
+[node name="Scoreboard" type="Control"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_47sb0")
+
+[node name="Board" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Processes" type="Label" parent="Board"]
+layout_mode = 2
+text = "Processes: 0"
+script = ExtResource("2_orhur")
+label = "Processes"
+
+[node name="Connections" type="Label" parent="Board"]
+layout_mode = 2
+text = "Connections: "
+script = ExtResource("2_orhur")
+label = "Connections"
+
+[node name="Score" type="Label" parent="Board"]
+layout_mode = 2
+text = "Score: "
+script = ExtResource("2_orhur")
+label = "Score"
