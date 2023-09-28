@@ -3,6 +3,9 @@
 This is the source code to a ~~game~~ Collector runtime data visualization tool,
 where you try to catch ~~balls~~ process and network events with a barrel.
 
+![Main](./img/main-page.png)
+![Berzerk](./img/berzerk-mode.png)
+
 In demo mode, this will start up a mock sensor alongside collector and feed
 events directly into the game, to visualize the events and provide difficulty
 levels.
