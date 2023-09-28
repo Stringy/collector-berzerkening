@@ -10,6 +10,7 @@ enum Mode {
 @export var start_interval: float = 1
 @export var min_interval: float = 0.1
 @export var per_frame: float = 60
+@export var difficulty_increment: float = 7.5
 
 var ball = preload("res://scenes/projectile.tscn")
 var explosion = preload("res://scenes/explosion.tscn")
@@ -34,7 +35,7 @@ func _ready():
 	spawn_timer.wait_time = start_interval
 	
 	difficulty_timer = Timer.new()
-	difficulty_timer.wait_time = 5.0
+	difficulty_timer.wait_time = difficulty_increment
 	
 	add_child(spawn_timer)
 	add_child(difficulty_timer)
@@ -52,7 +53,7 @@ func _on_timer_timeout():
 func _on_difficulty_timeout():
 	if current_interval < min_interval:
 		return
-	current_interval /= 2
+	current_interval *= 0.66
 	spawn_timer.wait_time = current_interval 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
