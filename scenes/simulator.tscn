@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://m57lnfjogw1v"]
+[gd_scene load_steps=5 format=3 uid="uid://m57lnfjogw1v"]
 
 [ext_resource type="PackedScene" uid="uid://d0xhenb8ocuc7" path="res://scenes/basket.tscn" id="1_oael4"]
 [ext_resource type="Script" path="res://scripts/controller.gd" id="1_r5vt8"]
 [ext_resource type="PackedScene" uid="uid://cvcvdywx13b8s" path="res://scenes/scoreboard.tscn" id="3_k1qbn"]
+[ext_resource type="PackedScene" uid="uid://d050vhoy5tebg" path="res://scenes/exit_button.tscn" id="4_0ffp3"]
 
 [node name="Simulator" type="Node2D"]
 script = ExtResource("1_r5vt8")
@@ -12,6 +13,12 @@ per_frame = 5.0
 position = Vector2(562, 603)
 
 [node name="Scoreboard" parent="." instance=ExtResource("3_k1qbn")]
+
+[node name="Exit" parent="." instance=ExtResource("4_0ffp3")]
+offset_left = 1096.0
+offset_top = 8.0
+offset_right = 1352.0
+offset_bottom = 264.0
 
 [connection signal="captured_network" from="Basket" to="." method="_on_basket_captured_network"]
 [connection signal="captured_process" from="Basket" to="." method="_on_basket_captured_process"]

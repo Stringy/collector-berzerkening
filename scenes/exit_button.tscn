@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d050vhoy5tebg"]
+
+[ext_resource type="Texture2D" uid="uid://cbeqox0n0b76c" path="res://assets/exit.png" id="1_nidac"]
+[ext_resource type="Script" path="res://scripts/exit.gd" id="2_n155v"]
+
+[node name="Exit" type="TextureButton"]
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.194444, 0.199203)
+texture_normal = ExtResource("1_nidac")
+script = ExtResource("2_n155v")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
