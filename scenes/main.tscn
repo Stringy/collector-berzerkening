@@ -105,6 +105,7 @@ script = ExtResource("3_tg7l4")
 layout_mode = 2
 text = "Collector Mode"
 script = ExtResource("4_ilt7x")
+demo = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
