@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1bmnfxc2r2gm"]
+[gd_scene load_steps=15 format=3 uid="uid://c1bmnfxc2r2gm"]
 
 [ext_resource type="Script" path="res://scripts/ui/main.gd" id="1_6cu04"]
 [ext_resource type="Texture2D" uid="uid://dhf8foivftj46" path="res://assets/title.png" id="1_32y7m"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://scripts/buttons/simulate.gd" id="3_tg7l4"]
 [ext_resource type="Script" path="res://scripts/buttons/berserk.gd" id="4_ilt7x"]
 [ext_resource type="Texture2D" uid="uid://ccvok64g5aftd" path="res://assets/matrix.jpg" id="6_mxu5l"]
+[ext_resource type="Texture2D" uid="uid://d1f7413pwyu2i" path="res://assets/black-background.png" id="8_03a8n"]
+[ext_resource type="Texture2D" uid="uid://d02cfhigxbjlu" path="res://assets/sprites/ball_red.svg" id="8_dawbr"]
+[ext_resource type="Texture2D" uid="uid://dqg171d0i78ay" path="res://assets/sprites/ball_blue.svg" id="9_hybs2"]
 
 [sub_resource type="SystemFont" id="SystemFont_fo18y"]
 
@@ -72,7 +75,6 @@ texture = ExtResource("6_mxu5l")
 
 [node name="Banner" type="Sprite2D" parent="."]
 position = Vector2(584, 123)
-scale = Vector2(1.04218, 1.04218)
 texture = ExtResource("1_32y7m")
 script = ExtResource("2_nlx0l")
 
@@ -82,12 +84,17 @@ libraries = {
 "": SubResource("AnimationLibrary_405xp")
 }
 
+[node name="Black-background" type="Sprite2D" parent="."]
+position = Vector2(583.5, 319)
+scale = Vector2(0.548828, 0.308594)
+texture = ExtResource("8_03a8n")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-offset_top = 250.0
-offset_right = 1152.0
-offset_bottom = 281.0
-alignment = 1
+offset_left = 469.0
+offset_top = 253.0
+offset_right = 689.0
+offset_bottom = 284.0
 
 [node name="Simulate" type="Button" parent="HBoxContainer"]
 layout_mode = 2
@@ -98,6 +105,28 @@ script = ExtResource("3_tg7l4")
 layout_mode = 2
 text = "Collector Mode"
 script = ExtResource("4_ilt7x")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.005
+anchor_bottom = -0.005
+offset_left = 511.0
+offset_top = 309.24
+offset_right = 800.0
+offset_bottom = 378.24
+text = "Process:        1 point
+
+Connection: 5 points"
+fit_content = true
+
+[node name="BallRed" type="Sprite2D" parent="."]
+position = Vector2(477, 317)
+texture = ExtResource("8_dawbr")
+
+[node name="BallBlue" type="Sprite2D" parent="."]
+position = Vector2(477, 366)
+texture = ExtResource("9_hybs2")
 
 [connection signal="pressed" from="HBoxContainer/Simulate" to="HBoxContainer/Simulate" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Berserk" to="HBoxContainer/Berserk" method="_on_pressed"]
